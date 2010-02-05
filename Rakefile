@@ -5,11 +5,13 @@ require 'toto'
 task :default => :new
 
 task :new do
+  title = ENV['TITLE'] || 'Change Me'
+  slug = title.downcase.gsub(/&/, 'and').gsub(/\s+/, '-').gsub(/[^a-z0-9-]/, '')
   article = {'title' => nil, 'date' => Time.now.strftime("%d/%m/%Y"), 'author' => @config[:author]}.to_yaml
   article << "\n"
   article << "Once upon a time...\n\n"
 
-  path = "#{Toto::Paths[:articles]}/#{Time.now.strftime("%Y-%m-%d")}.#{@config[:ext]}"
+  path = "#{Toto::Paths[:articles]}/#{Time.now.strftime("%Y-%m-%d")}-#{slug}.#{@config[:ext]}"
 
   unless File.exist? path
     File.open(path, "w") do |file|
