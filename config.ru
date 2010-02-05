@@ -11,9 +11,9 @@ toto = Toto::Server.new do
   # Add your settings here
   # set [:setting], [value]
   #
-  set :author, 		'Geoff Longman'
+  set :author,		'Geoff Longman'
   set :title, 		'Ramblings by MetaGeoff'
-  set :url,				'http://glongman.heroku.com'
+  set :url,				'http://metageoff.com'
 	set :root,			'index'
   set :markdown,	:smart
   set :discus, 		'ramblingsbymetageoff'
