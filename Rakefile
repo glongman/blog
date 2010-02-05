@@ -7,7 +7,7 @@ task :default => :new
 task :new do
   title = ENV['TITLE'] || 'Change Me'
   slug = title.downcase.gsub(/&/, 'and').gsub(/\s+/, '-').gsub(/[^a-z0-9-]/, '')
-  article = {'title' => nil, 'date' => Time.now.strftime("%d/%m/%Y"), 'author' => @config[:author]}.to_yaml
+  article = {'title' => title, 'date' => Time.now.strftime("%d/%m/%Y"), 'author' => @config[:author]}.to_yaml
   article << "\n"
   article << "Once upon a time...\n\n"
 
