@@ -16,7 +16,7 @@ toto = Toto::Server.new do
   set :url,				'http://metageoff.com'
 	set :root,			'index'
   set :markdown,	:smart
-  set :discus, 		'ramblingsbymetageoff'
+  set :disqus, 		'ramblingsbymetageoff'
 	set :summary,   :max => 150, :delim => /~\n/ 
 	set :ext,				'txt'
   set :date,			lambda {|now| now.strftime("%B #{now.day.ordinal} %Y") }
