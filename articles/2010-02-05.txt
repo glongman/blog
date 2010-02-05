@@ -1,0 +1,7 @@
+--- 
+author: metageoff
+title: First Test Post
+date: 05/02/2010
+
+Once upon a time...
+
