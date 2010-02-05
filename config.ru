@@ -13,13 +13,13 @@ toto = Toto::Server.new do
   #
   set :author, 		'Geoff Longman'
   set :title, 		'Ramblings by MetaGeoff'
-  set :url, 			'http://glongman.heroku.com'
-	set :root, 			'index'
-  set :markdown, 	:smart
-  set :discus, 		ramblingsbymetageoff
+  set :url,				'http://glongman.heroku.com'
+	set :root,			'index'
+  set :markdown,	:smart
+  set :discus, 		'ramblingsbymetageoff'
 	set :summary,   :max => 150, :delim => /~\n/ 
-	set :ext,       'txt'
-  set :date, lambda {|now| now.strftime("%B #{now.day.ordinal} %Y") }
+	set :ext,				'txt'
+  set :date,			lambda {|now| now.strftime("%B #{now.day.ordinal} %Y") }
 end
 
 run toto
