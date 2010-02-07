@@ -1,0 +1,11 @@
+--- 
+author: metageoff
+title: First Post
+date: 05/02/2010
+
+I've decided to blog again. The last time I did was about 4 years ago when I used [a blog](http://www.jroller.com/glongman/ "Plug-in Web Log") to announce progress for that [little open source project](http://spindle.sourceforge.net/ "Spindle - An Eclipse Plugin for Tapestry") I made. 
+
+Walking away from it and the 5 years invested was annoying. Everything about that project and how it ended was annoying and that included blogging.
+
+We'll see how this goes.
+

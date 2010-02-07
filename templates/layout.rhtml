@@ -6,11 +6,18 @@
     <title><%= title %></title>
   </head>
   <body>
+	  <header>
+			<h1><a href="/">metageoff</a></h1>
+		</header>
     <section>
+	    <a href="http://github.com/glongman">
+			  <img alt="Fork me on GitHub" src="/images/forkme.png" style="border: 0pt none ; position: absolute; top: 0pt; right: 0pt;">
+			</a>
       <%= yield %> 
     </section>
     <footer>
-      powered by <a href="http://cloudhead.io/toto">toto</a>
+      <p>powered by <a href="http://cloudhead.io/toto">toto</a></p>
+      <p>Copyright &copy; 2010 <a href="/about">Geoffrey Longman</a></p>
     </footer>
   </body>
 </html>

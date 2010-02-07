@@ -1,7 +1,0 @@
---- 
-author: glongman
-title: Third Test Post
-date: 05/02/2010
-
-Three times the charm?
-
