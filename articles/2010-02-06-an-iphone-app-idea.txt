@@ -1,0 +1,35 @@
+--- 
+author: metageoff
+title: An IPhone App Idea
+date: 06/02/2010
+
+Tonight I stumbled upon a nice [article](http://blog.indieiphonedev.com/2010/01/27/promoting-your-iphone-app-in-print/) by Tim West. Tim runs the [LogYourRun.com](http://LogYourRun.com) site and had built an iPhone app for it too. In the article, Tim describes how he is using print to market his app by putting a screenshot of it on the back of a business card.
+
+But what caught my eye was this:
+
+> It would be great if apple implemented something similar to the android 
+> barcode scanner where all you have to do is take a picture to download 
+> an app.  Maybe someone is already working on making such an application for the iPhone.
+
+I think that's a great idea. I wonder if the screenshots that appear in the App Store are easily accessible to all. Some kind of screen scraping I suspect. Image recognition is definitely not my area of expertise but I can see how an app that can do this could be used:
+
+##Scenario 1
+
+John bought this really cool game at the App Store. 
+
+John has coffee with Josh and shows the game to him. Josh wants the game right now.
+
+John holds up his device with the game running. Josh launches the app and points the camera at it.
+
+Boom, the app recognizes the game and boots Josh's device over to the App Store, he buys.
+
+##Scenario 2
+
+Tim has those business cards that include a screenshot of his LogYourRun app on the back side and leaves the cards everywhere that joggers frequent.
+
+Somebody picks up one of Tims' cards and likes the screenshot. They have an iPhone so they fire up this un-named but super app and buy LogYourRun.
+
+##Shazam For Apps
+
+Yes that's exactly what this app would be. [Shazam](http://www.shazam.com/music/web/home.html) for Apps.
+
