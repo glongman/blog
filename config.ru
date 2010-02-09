@@ -1,9 +1,10 @@
 require 'toto'
 
 # Rack config
-use Rack::Static, :urls => ['/css', '/js', '/images', '/favicon.ico'], :root => 'public'
+use Rack::Static, :urls => ['/bookmarklet', '/css', '/js', '/images', '/favicon.ico'], :root => 'public'
 use Rack::ShowExceptions
 use Rack::CommonLogger
+use Rack::ContentType, "text/html"
 
 # Run application
 toto = Toto::Server.new do
