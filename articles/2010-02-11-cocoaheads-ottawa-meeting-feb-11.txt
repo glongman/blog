@@ -1,0 +1,9 @@
+--- 
+author: glongman
+title: "CocoaHeads Ottawa Meeting: Feb 11"
+date: 11/02/2010
+
+Tonight I'm attending the [CocoaHeads Ottawa](http://http://www.cocoaheads.org/ca/OttawaGatineauOntario/index.html) meeting.
+
+Will update this as events occur.
+
