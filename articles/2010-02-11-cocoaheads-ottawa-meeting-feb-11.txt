@@ -25,4 +25,6 @@ Notes (almost real time):
 * and... I'm finished with google app engine. Google wants a mobile number to verify my account.... I don't own a cell phone. FAIL.
 
 Coming Soon (we hope) to the App Store: Tweetie10
+
+My primary takeaway: Interface Builder files (.nib, .xib) should be treated as binary in source control. The folks building Tweetie10 had great grief trying to merge changes in those files.
  
