@@ -21,4 +21,5 @@ Notes (almost real time):
 * First up, Integrating Web Services with iPhone Apps using Google App Engine.
 * Part I - GAE setup.
 * hmm, where's Cappucino? OH: presenter isn't here.
+* just installed GAE on my MBP.
 
