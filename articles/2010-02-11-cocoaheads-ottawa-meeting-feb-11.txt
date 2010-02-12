@@ -22,4 +22,5 @@ Notes (almost real time):
 * Part I - GAE setup.
 * hmm, where's Cappucino? OH: presenter isn't here.
 * just installed GAE on my MBP.
+* and... I'm finished with google app engine. Google wants a mobile number to verify my account.... I don't own a cell phone. FAIL.
 
