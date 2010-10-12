@@ -1,0 +1,28 @@
+--- 
+author: glongman
+title: Rails 3 Unobtrusive JS in a most unusual place
+date: 11/10/2010
+
+A few days ago [John Duff](http://github.com/jduff) was talking about the cool the new unobtrusive javascript helpers in Rails 3. Basically it means the end of inline javascript; something that was one of the ugly bits of Rails. John explained to me that the tag and form generating helpers now have an option to make the generated tags 'remote'. An example:
+
+<pre class="active4d">form_for(@post, :remote =&gt; true)
+</pre>
+
+This yields a form tag containing [HTML 5 data attributes](http://ejohn.org/blog/html-5-data-attributes/). The magic is completed on the client by a js library provided by the framework. As I'm partial to jQuery, [this (Rails.js)](http://github.com/rails/jquery-ujs/blob/master/src/rails.js) is the implementation of that library I'm likely to use. The library makes annotated elements into ajax wunderkind. Cool.
+
+Which got me to thinking. This library should be usable with any framework, one just needs to generate HTML with the right data attributes. John has been working on an ajax Todo app as his Rails 3 learning tool (c'mon John - share that project already!). I decided to [implement the same app](http://github.com/glongman/node-todo) using [Express](http://expressjs.com/), a web framework that runs in [Node.js](http://nodejs.org). Node and Express are new to me and this would be the first app I've written for this target platform.
+
+Express is a bit like Rack++, or [Sinatra](http://www.sinatrarb.com/), as it has simple, but powerful, implementations of routing, view rendering, and more that I have yet to figure out. But one thing that was a breeze was ajax because I was able to drop in Rails.js and it just worked. 
+
+Here is a snippet of one of my form tags:
+
+<pre class="active4d">&lt;form id=&quot;task_create&quot; 
+    class=&quot;simple_form task&quot; 
+    accept-charset=&quot;UTF-8&quot; 
+    action=&quot;/tasks&quot; 
+    method=&quot;post&quot; 
+    data-remote=&quot;true&quot;&gt;
+</pre>
+    
+Just like in Rails 3, posting the form is done via ajax. Very nice.
+
