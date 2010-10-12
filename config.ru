@@ -1,12 +1,18 @@
+
 require 'toto'
 
 # Rack config
-use Rack::Static, :urls => ['/bookmarklet', '/css', '/js', '/images', '/favicon.ico'], :root => 'public'
-use Rack::ShowExceptions
+use Rack::Static, :urls => ['/css', '/js', '/images', '/favicon.ico'], :root => 'public'
 use Rack::CommonLogger
 use Rack::ContentType, "text/html"
 
-# Run application
+if ENV['RACK_ENV'] == 'development'
+  use Rack::ShowExceptions
+end
+
+#
+# Create and configure a toto instance
+#
 toto = Toto::Server.new do
   #
   # Add your settings here
@@ -21,7 +27,9 @@ toto = Toto::Server.new do
 	set :summary,   :max => 100, :delim => /~\n/ 
 	set :ext,				'txt'
   set :date,			lambda {|now| now.strftime("%B #{now.day.ordinal} %Y") }
+  set :cache,     28800
 end
 
 run toto
+
 
