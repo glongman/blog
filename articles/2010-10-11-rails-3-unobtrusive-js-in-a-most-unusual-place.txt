@@ -4,8 +4,7 @@ title: Rails 3 Unobtrusive JS in a most unusual place
 date: 11/10/2010
 
 A few days ago [John Duff](http://github.com/jduff) was talking about the cool the new unobtrusive javascript helpers in Rails 3. Basically it means the end of inline javascript; something that was one of the ugly bits of Rails. John explained to me that the tag and form generating helpers now have an option to make the generated tags 'remote'. An example:
-
-<pre class="active4d">form_for(@post, :remote =&gt; true)
+<pre class="active4d"><span class="FunctionName">form_for</span>(@<span class="Variable">post</span>, :<span class="Variable">remote</span> =&gt; <span class="Variable">true</span>)
 </pre>
 
 This yields a form tag containing [HTML 5 data attributes](http://ejohn.org/blog/html-5-data-attributes/). The magic is completed on the client by a js library provided by the framework. As I'm partial to jQuery, [this (Rails.js)](http://github.com/rails/jquery-ujs/blob/master/src/rails.js) is the implementation of that library I'm likely to use. The library makes annotated elements into ajax wunderkind. Cool.
@@ -16,12 +15,12 @@ Express is a bit like Rack++, or [Sinatra](http://www.sinatrarb.com/), as it has
 
 Here is a snippet of one of my form tags:
 
-<pre class="active4d">&lt;form id=&quot;task_create&quot; 
-    class=&quot;simple_form task&quot; 
-    accept-charset=&quot;UTF-8&quot; 
-    action=&quot;/tasks&quot; 
-    method=&quot;post&quot; 
-    data-remote=&quot;true&quot;&gt;
+<pre class="active4d"><span class="TagContainer"><span class="TagContainer">&lt;</span><span class="TagName">form</span> <span class="TagContainer"><span class="TagAttribute">id</span><span class="TagContainer">=</span><span class="String"><span class="String">&quot;</span><span class="String">task_create</span><span class="String">&quot;</span></span></span> </span>
+<span class="TagContainer">    <span class="TagAttribute">class</span>=<span class="String"><span class="String">&quot;</span>simple_form task<span class="String">&quot;</span></span> </span>
+<span class="TagContainer">    <span class="TagAttribute">accept-charset</span>=<span class="String"><span class="String">&quot;</span>UTF-8<span class="String">&quot;</span></span> </span>
+<span class="TagContainer">    <span class="TagAttribute">action</span>=<span class="String"><span class="String">&quot;</span>/tasks<span class="String">&quot;</span></span> </span>
+<span class="TagContainer">    <span class="TagAttribute">method</span>=<span class="String"><span class="String">&quot;</span>post<span class="String">&quot;</span></span> </span>
+<span class="TagContainer">    <span class="TagAttribute">data-remote</span>=<span class="String"><span class="String">&quot;</span>true<span class="String">&quot;</span></span><span class="TagContainer">&gt;</span></span>
 </pre>
     
 Just like in Rails 3, posting the form is done via ajax. Very nice.
