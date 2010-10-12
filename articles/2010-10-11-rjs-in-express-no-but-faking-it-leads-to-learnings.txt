@@ -1,0 +1,71 @@
+--- 
+author: glongman
+title: RJS in Express? No, but faking it leads to learnings
+date: 11/10/2010
+
+(I'm building my first [Express](http://expressjs.com/)/[Node.js](http://nodejs.org) app having come from Rails)
+
+In my last [post](/2010/10/11/rails-3-unobtrusive-js-in-a-most-unusual-place) I had my forms ajax posting to  [my Todo app](http://github.com/glongman/node-todo). The next step is to return executable javascript and update the UI. I've been doing Rails since version 1.2 and RJS has been my crutch for this. However, Express is not Rails and it has no RJS equivalent. No problem, just set the response Content-Type to 'application/javascript" and render out some jQuery code to be executed on the client.
+
+My express route to handle the updating a Todo record:
+
+<pre class="active4d"><span class="Variable">this</span>.app.put(<span class="String"><span class="String">'</span>/tasks/:id<span class="String">'</span></span>, <span class="Storage">function</span>(req, res) {
+  Tasks.updateById(req.param(<span class="String"><span class="String">'</span>id<span class="String">'</span></span>), req.<span class="NamedConstant">body</span>, <span class="Storage">function</span>(err, task){
+    <span class="Keyword">if</span> (err) {
+      <span class="LineComment"><span class="LineComment">//</span> handle the error</span>
+    } <span class="Keyword">else</span> {
+      Tasks.allTags(<span class="Storage">function</span>(all_tags) {
+        res.<span class="NamedConstant">headers</span>[<span class="String"><span class="String">'</span>Content-Type<span class="String">'</span></span>] <span class="Operator">=</span> <span class="String"><span class="String">'</span>application/javascript<span class="String">'</span></span>;
+        res.render(<span class="String"><span class="String">'</span>tasks/update.js.ejs<span class="String">'</span></span>, {layout:<span class="BuiltInConstant">false</span>, locals:{task:task, all_tags:all_tags}});
+      })
+    }
+  });  
+});  
+</pre>
+
+So, blah-di-blah, update the record, read some data for the UI update and render a template containing jQuery source to update the UI. One thing I learned right away was that Express will render the template with the layout by default. Understandable as Rails does this too in most cases. But Rails treats RJS templates, or templates with .js in the name, specially; they render without a layout. A quick look at the Express docs solved this, just pass <pre class="">
+  layout:<span class="BuiltInConstant">false</span>
+</pre> to the render method.
+
+My first, naive, attempt at the template was thus:
+
+<pre class="active4d"><span class="Operator">$</span>(<span class="String"><span class="String">'</span>li#task_&lt;%=task._id%&gt;<span class="String">'</span></span>).html(<span class="String"><span class="String">&quot;</span>&lt;%-  </span>
+<span class="String">    partial(</span>
+<span class="String">       'tasks/_incomplete_task.ejs', </span>
+<span class="String">       {collection:[task], as: 'task'}</span>
+<span class="String">     )</span>
+<span class="String">%&gt;<span class="String">&quot;</span></span>);
+<span class="Operator">$</span>(<span class="String"><span class="String">'</span>#task_&lt;%=task._id%&gt;<span class="String">'</span></span>).effect(<span class="String"><span class="String">&quot;</span>highlight<span class="String">&quot;</span></span>, {}, <span class="Number">2000</span>);
+<span class="Operator">$</span>(<span class="String"><span class="String">'</span>#tags<span class="String">'</span></span>).html(<span class="String"><span class="String">&quot;</span>&lt;%- </span>
+<span class="String">    partial(</span>
+<span class="String">      'tasks/_tag_link.ejs', </span>
+<span class="String">      {collection: all_tags, as: 'tag'}</span>
+<span class="String">    )</span>
+<span class="String">%&gt;<span class="String">&quot;</span></span>)
+</pre>
+
+In a nutshell there are 3 jQuery operations here. First, replace the html for the updated task with new html, then highlight the new html and last update a list of task tags on the page.
+
+But this did not work. The browser complained that the javascript passed would not parse and was not helpful in explaining why. After some investigation I learned that I was taking for granted that Rails was escaping double quote characters and newlines in the generated response html bits. A hacky but effective fix was to use regexes to escape those characters.
+
+<pre class="active4d"><span class="Operator">$</span>(<span class="String"><span class="String">'</span>li#task_&lt;%=task._id%&gt;<span class="String">'</span></span>).html(<span class="String"><span class="String">&quot;</span>&lt;%-  </span>
+<span class="String">    partial(</span>
+<span class="String">       'tasks/_incomplete_task.ejs', </span>
+<span class="String">       {collection:[task], as: 'task'}</span>
+<span class="String">     )</span>.replace(/"/gi,"\\\"")
+      .replace(/\n/gi, "\\n")
+<span class="String">%&gt;<span class="String">&quot;</span></span>);
+<span class="Operator">$</span>(<span class="String"><span class="String">'</span>#task_&lt;%=task._id%&gt;<span class="String">'</span></span>).effect(<span class="String"><span class="String">&quot;</span>highlight<span class="String">&quot;</span></span>, {}, <span class="Number">2000</span>);
+<span class="Operator">$</span>(<span class="String"><span class="String">'</span>#tags<span class="String">'</span></span>).html(<span class="String"><span class="String">&quot;</span>&lt;%- </span>
+<span class="String">    partial(</span>
+<span class="String">      'tasks/_tag_link.ejs', </span>
+<span class="String">      {collection: all_tags, as: 'tag'}</span>
+<span class="String">    )</span>.replace(/"/gi,"\\\"")
+     .replace(/\n/gi, "\\n")
+<span class="String">%&gt;<span class="String">&quot;</span></span>)
+</pre>
+
+Ugly but effective. I will be looking soon into making a helper to make this more DRY.
+
+
+

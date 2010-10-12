@@ -1,0 +1,7 @@
+--- 
+author: glongman
+title: RJS in Express? No, no but faking it leads to learnings
+date: 11/10/2010
+
+Once upon a time...
+
