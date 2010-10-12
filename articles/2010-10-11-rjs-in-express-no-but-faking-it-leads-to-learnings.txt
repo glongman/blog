@@ -3,12 +3,9 @@ author: glongman
 title: RJS in Express? No, but faking it leads to learnings
 date: 11/10/2010
 
-(I'm building my first [Express](http://expressjs.com/)/[Node.js](http://nodejs.org) app having come from Rails)
-
 In my last [post](/2010/10/11/rails-3-unobtrusive-js-in-a-most-unusual-place) I had my forms ajax posting to  [my Todo app](http://github.com/glongman/node-todo). The next step is to return executable javascript and update the UI. I've been doing Rails since version 1.2 and RJS has been my crutch for this. However, Express is not Rails and it has no RJS equivalent. No problem, just set the response Content-Type to 'application/javascript" and render out some jQuery code to be executed on the client.
 
 My express route to handle the updating a Todo record:
-
 <pre class="active4d"><span class="Variable">this</span>.app.put(<span class="String"><span class="String">'</span>/tasks/:id<span class="String">'</span></span>, <span class="Storage">function</span>(req, res) {
   Tasks.updateById(req.param(<span class="String"><span class="String">'</span>id<span class="String">'</span></span>), req.<span class="NamedConstant">body</span>, <span class="Storage">function</span>(err, task){
     <span class="Keyword">if</span> (err) {
@@ -16,7 +13,10 @@ My express route to handle the updating a Todo record:
     } <span class="Keyword">else</span> {
       Tasks.allTags(<span class="Storage">function</span>(all_tags) {
         res.<span class="NamedConstant">headers</span>[<span class="String"><span class="String">'</span>Content-Type<span class="String">'</span></span>] <span class="Operator">=</span> <span class="String"><span class="String">'</span>application/javascript<span class="String">'</span></span>;
-        res.render(<span class="String"><span class="String">'</span>tasks/update.js.ejs<span class="String">'</span></span>, {layout:<span class="BuiltInConstant">false</span>, locals:{task:task, all_tags:all_tags}});
+        res.render(
+          <span class="String"><span class="String">'</span>tasks/update.js.ejs<span class="String">'</span></span>, 
+          {layout:<span class="BuiltInConstant">false</span>, locals:{task:task, all_tags:all_tags}}
+        );
       })
     }
   });  
@@ -66,6 +66,8 @@ But this did not work. The browser complained that the javascript passed would n
 </pre>
 
 Ugly but effective. I will be looking soon into making a helper to make this more DRY.
+
+(I'm building my first [Express](http://expressjs.com/)/[Node.js](http://nodejs.org) app having come from Rails)
 
 
 
