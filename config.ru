@@ -1,8 +1,9 @@
 
+require 'eventmachine'
 require 'toto'
-
+require 'lib/intercept'
 # Rack config
-use Rack::Static, :urls => ['/css', '/js', '/images', '/favicon.ico'], :root => 'public'
+use Rack::Static, :urls => ['/static', 'globe', '/css', '/js', '/images', '/favicon.ico'], :root => 'public'
 use Rack::CommonLogger
 use Rack::ContentType, "text/html"
 

@@ -1,4 +1,7 @@
 toto      --version=">= 0.4.6" 
 builder
 rdiscount
+hpricot
+json
+
 
