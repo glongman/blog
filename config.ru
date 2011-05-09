@@ -1,7 +1,10 @@
-
+$foursquare_json = :no_data
+require 'thin'
 require 'eventmachine'
 require 'toto'
 require 'lib/intercept'
+require 'lib/thin_patch'
+require 'lib/foursquare'
 # Rack config
 use Rack::Static, :urls => ['/static', '/globe', '/css', '/js', '/images', '/favicon.ico'], :root => 'public'
 use Rack::CommonLogger
@@ -32,5 +35,3 @@ toto = Toto::Server.new do
 end
 
 run toto
-
-
